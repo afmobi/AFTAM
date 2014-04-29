@@ -28,7 +28,7 @@ func main() {
 
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
 	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
-	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerThejakartapost)
+	go PollFeed("http://www.thejakartapost.com/breaking/feed", itemHandlerThejakartapost)
 	PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
 
 	fmt.Printf("Start to get the RSS\n")
