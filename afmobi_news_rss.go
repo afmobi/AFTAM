@@ -21,13 +21,15 @@ func main() {
 	fmt.Printf("Init from ")
 	fmt.Println(time.Now().Format("2006-01-02  15:04:05"))
 	log.SetOutput(os.Stdout)
-	fmt.Printf("Second\n")
+	fmt.Printf("Let's start...\n")
 	//go PollFeed("http://blog.golang.org/feed.atom", itemHandlerGoBlog)
 	//go PollFeed("https://news.ycombinator.com/rss", itemHandlerHackerNews)
 	//PollFeed("http://www.reddit.com/r/golang.rss", itemHandlerReddit)
+
+	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
+	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
 	PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
-	//go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
-	//go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
+
 	fmt.Printf("Start to get the RSS\n")
 }
 
