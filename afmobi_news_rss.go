@@ -29,7 +29,8 @@ func main() {
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
 	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
 	go PollFeed("http://www.thejakartapost.com/breaking/feed", itemHandlerThejakartapost)
-	PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
+	go PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
+	go PollFeed("http://feeds.feedburner.com/onlineafrica", itemHandlerOafrica)
 
 	fmt.Printf("Start to get the RSS\n")
 }
@@ -163,6 +164,24 @@ func itemHandlerBBCAfrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 
 	if _, ok := first["bbcafrica"]; !ok {
 		first["bbcafrica"] = false
+	} else {
+		genericItemHandler(feed, ch, newItems, f)
+	}
+}
+
+func itemHandlerOafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+				fmt.Printf("Oafrica start\n")
+				defer fmt.Printf("Oafrica end\n")
+	f := func(item *rss.Item) {
+		short_title := item.Title
+		if len(short_title) > 100 {
+			short_title = short_title[:99] + "…"
+		}
+		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Africa" + " #Oafrica")
+	}
+
+	if _, ok := first["oafrica"]; !ok {
+		first["oafrica"] = false
 	} else {
 		genericItemHandler(feed, ch, newItems, f)
 	}
