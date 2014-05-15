@@ -192,8 +192,8 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 				defer fmt.Printf("TheJakartaPost end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
-		if len(short_title) > 100 {
-			short_title = short_title[:99] + "…"
+		if len(short_title) > 50 {
+			short_title = short_title[:49] + "…"
 		}
 		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Indonesia" + " #thejakartapost")
 	}
