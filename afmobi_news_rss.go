@@ -26,11 +26,13 @@ func main() {
 	//go PollFeed("https://news.ycombinator.com/rss", itemHandlerHackerNews)
 	//PollFeed("http://www.reddit.com/r/golang.rss", itemHandlerReddit)
 
+	go PollFeed("http://www.fifa.com/worldcup/news/rss.xml" , itemHandlerWC2014)
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
 	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
 	go PollFeed("http://www.thejakartapost.com/breaking/feed", itemHandlerThejakartapost)
 	go PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
 	PollFeed("http://feeds.feedburner.com/onlineafrica", itemHandlerOafrica)
+
 
 	fmt.Printf("Start to get the RSS\n")
 }
@@ -200,6 +202,25 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 
 	if _, ok := first["thejakartapost"]; !ok {
 		first["thejakartapost"] = false
+	} else {
+		genericItemHandler(feed, ch, newItems, f)
+	}
+}
+
+//FIFA 2014
+func itemHandlerWC2014(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+				fmt.Printf("World Cup start\n")
+				defer fmt.Printf("World Cup end\n")
+	f := func(item *rss.Item) {
+		short_title := item.Title
+		if len(short_title) > 100 {
+			short_title = short_title[:99] + "…"
+		}
+		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #WorldCup")
+	}
+
+	if _, ok := first["WorldCup"]; !ok {
+		first["WorldCup"] = false
 	} else {
 		genericItemHandler(feed, ch, newItems, f)
 	}
