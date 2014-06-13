@@ -124,7 +124,8 @@ func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		tag_country := strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1)
+		tag_country := strings.Replace(strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1), "'", "", -1)
+		// tag_country := strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1)
 /*		PostTweet(short_title + " " + item.Links[0].Href + " #allafrica")*/
 PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #" + tag_country + " #allafrica")
 	}
