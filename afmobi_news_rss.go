@@ -198,7 +198,8 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 		if len(short_title) > 50 {
 			short_title = short_title[:49] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Indonesia" + " #thejakartapost")
+		prefix := "http://www.thejakartapost.com/"
+		PostTweet(short_title + " " + prefix + item.Links[0].Href + " #afmobi" + " #Indonesia" + " #thejakartapost")
 	}
 
 	if _, ok := first["thejakartapost"]; !ok {
@@ -236,8 +237,7 @@ func itemHandlerVietnamplus(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		prefix := "http://www.thejakartapost.com/"
-		PostTweet(short_title + " " + prefix + item.Links[0].Href + " #afmobi" + " #Vietnamplus")
+		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Vietnamplus")
 	}
 
 	if _, ok := first["Vietnamplus"]; !ok {
