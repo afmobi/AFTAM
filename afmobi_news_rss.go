@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"os"
 	"regexp"
-	"time"
 	"strings"
+	"time"
 )
 
 const timeout = 50
@@ -33,7 +33,6 @@ func main() {
 	go PollFeed("http://www.thejakartapost.com/breaking/feed", itemHandlerThejakartapost)
 	go PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
 	PollFeed("http://feeds.feedburner.com/onlineafrica", itemHandlerOafrica)
-
 
 	fmt.Printf("Start to get the RSS\n")
 }
@@ -117,8 +116,8 @@ func itemHandlerReddit(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 }
 
 func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
-        fmt.Printf("Allafrica start\n")
-        defer fmt.Printf("Allafrica end\n")
+	fmt.Printf("Allafrica start\n")
+	defer fmt.Printf("Allafrica end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
 		if len(short_title) > 100 {
@@ -126,8 +125,8 @@ func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		}
 		tag_country := strings.Replace(strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1), "'", "", -1)
 		// tag_country := strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1)
-/*		PostTweet(short_title + " " + item.Links[0].Href + " #allafrica")*/
-PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #" + tag_country + " #allafrica")
+		/*		PostTweet(short_title + " " + item.Links[0].Href + " #allafrica")*/
+		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #" + tag_country + " #allafrica")
 	}
 
 	if _, ok := first["allafrica"]; !ok {
@@ -138,8 +137,8 @@ PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #" + tag_count
 }
 
 func itemHandlerBiztechafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
-        fmt.Printf("Biztechafrica start\n")
-        defer fmt.Printf("Biztechafrica end\n")
+	fmt.Printf("Biztechafrica start\n")
+	defer fmt.Printf("Biztechafrica end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
 		if len(short_title) > 100 {
@@ -156,8 +155,8 @@ func itemHandlerBiztechafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.I
 }
 
 func itemHandlerBBCAfrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
-				fmt.Printf("BBCAfrica start\n")
-				defer fmt.Printf("BBCAfrica end\n")
+	fmt.Printf("BBCAfrica start\n")
+	defer fmt.Printf("BBCAfrica end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
 		if len(short_title) > 100 {
@@ -174,8 +173,8 @@ func itemHandlerBBCAfrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 }
 
 func itemHandlerOafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
-				fmt.Printf("Oafrica start\n")
-				defer fmt.Printf("Oafrica end\n")
+	fmt.Printf("Oafrica start\n")
+	defer fmt.Printf("Oafrica end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
 		if len(short_title) > 100 {
@@ -192,8 +191,8 @@ func itemHandlerOafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 }
 
 func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
-				fmt.Printf("TheJakartaPost start\n")
-				defer fmt.Printf("TheJakartaPost end\n")
+	fmt.Printf("TheJakartaPost start\n")
+	defer fmt.Printf("TheJakartaPost end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
 		if len(short_title) > 50 {
@@ -211,8 +210,8 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 
 // FIFA 2014
 func itemHandlerWC2014(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
-				fmt.Printf("World Cup start\n")
-				defer fmt.Printf("World Cup end\n")
+	fmt.Printf("World Cup start\n")
+	defer fmt.Printf("World Cup end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
 		if len(short_title) > 100 {
@@ -230,14 +229,15 @@ func itemHandlerWC2014(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 
 // Vietnamplus
 func itemHandlerVietnamplus(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
-				fmt.Printf("Vietnamplus start\n")
-				defer fmt.Printf("Vietnamplus end\n")
+	fmt.Printf("Vietnamplus start\n")
+	defer fmt.Printf("Vietnamplus end\n")
 	f := func(item *rss.Item) {
 		short_title := item.Title
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Vietnamplus")
+		prefix := "http://http://www.thejakartapost.com/"
+		PostTweet(short_title + " " + prefix + item.Links[0].Href + " #afmobi" + " #Vietnamplus")
 	}
 
 	if _, ok := first["Vietnamplus"]; !ok {
