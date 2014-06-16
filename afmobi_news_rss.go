@@ -198,7 +198,7 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 		if len(short_title) > 50 {
 			short_title = short_title[:49] + "…"
 		}
-		prefix := "http://www.thejakartapost.com/"
+		prefix := "thejakartapost.com/"
 		PostTweet(short_title + " " + prefix + item.Links[0].Href + " #afmobi" + " #Indonesia" + " #thejakartapost")
 	}
 
