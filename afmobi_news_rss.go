@@ -31,7 +31,7 @@ func main() {
 
 //http://www.theguardian.com/uk/rss
 	go PollFeed("http://www.theguardian.com/uk/rss", itemHandlerTheguardian)
-  go PollFeed("http://www.nationmultimedia.com/home/rss/breakingnews.rss", itemHandlerNationmultimedia) // nationmultimedia Breaking News
+  // go PollFeed("http://www.nationmultimedia.com/home/rss/breakingnews.rss", itemHandlerNationmultimedia) // nationmultimedia Breaking News
 	go PollFeed("http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP", itemHandlerGoal)
 	go PollFeed("http://www.fifa.com/worldcup/news/rss.xml", itemHandlerWC2014)
 	go PollFeed("http://en.vietnamplus.vn/Home/TOPSTORIES.rss", itemHandlerVietnamplus)
