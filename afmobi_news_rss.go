@@ -26,6 +26,13 @@ func main() {
 	//go PollFeed("https://news.ycombinator.com/rss", itemHandlerHackerNews)
 	//PollFeed("http://www.reddit.com/r/golang.rss", itemHandlerReddit)
 
+
+
+
+//http://www.theguardian.com/uk/rss
+	go PollFeed("http://www.theguardian.com/uk/rss", itemHandlerTheguardian)
+  go PollFeed("http://www.nationmultimedia.com/home/rss/breakingnews.rss", itemHandlerNationmultimedia) // nationmultimedia Breaking News
+	go PollFeed("http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP", itemHandlerGoal)
 	go PollFeed("http://www.fifa.com/worldcup/news/rss.xml", itemHandlerWC2014)
 	go PollFeed("http://en.vietnamplus.vn/Home/TOPSTORIES.rss", itemHandlerVietnamplus)
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
@@ -209,6 +216,25 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 	}
 }
 
+// Goal
+func itemHandlerGold(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+	fmt.Printf("Goal start\n")
+	defer fmt.Printf("Goal end\n")
+	f := func(item *rss.Item) {
+		short_title := item.Title
+		if len(short_title) > 100 {
+			short_title = short_title[:99] + "…"
+		}
+		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Goal.com")
+	}
+
+	if _, ok := first["Goal"]; !ok {
+		first["Goal"] = false
+	} else {
+		genericItemHandler(feed, ch, newItems, f)
+	}
+}
+
 // FIFA 2014
 func itemHandlerWC2014(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	fmt.Printf("World Cup start\n")
@@ -228,6 +254,9 @@ func itemHandlerWC2014(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	}
 }
 
+
+
+
 // Vietnamplus
 func itemHandlerVietnamplus(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	fmt.Printf("Vietnamplus start\n")
@@ -246,6 +275,45 @@ func itemHandlerVietnamplus(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 		genericItemHandler(feed, ch, newItems, f)
 	}
 }
+
+//Nationmultimedia
+func itemHandlerNationmultimedia(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+	fmt.Printf("Nationmultimedia start\n")
+	defer fmt.Printf("Nationmultimedia end\n")
+	f := func(item *rss.Item) {
+		short_title := item.Title
+		if len(short_title) > 100 {
+			short_title = short_title[:99] + "…"
+		}
+		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Nationmultimedia")
+	}
+
+	if _, ok := first["Nationmultimedia"]; !ok {
+		first["Nationmultimedia"] = false
+	} else {
+		genericItemHandler(feed, ch, newItems, f)
+	}
+}
+
+//Theguardian
+func itemHandlerTheguardian(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+	fmt.Printf("Theguardian start\n")
+	defer fmt.Printf("Theguardian end\n")
+	f := func(item *rss.Item) {
+		short_title := item.Title
+		if len(short_title) > 100 {
+			short_title = short_title[:99] + "…"
+		}
+		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Theguardian")
+	}
+
+	if _, ok := first["Theguardian"]; !ok {
+		first["Theguardian"] = false
+	} else {
+		genericItemHandler(feed, ch, newItems, f)
+	}
+}
+
 
 func PostTweet(tweet string) {
 	fmt.Printf("Run to post the tweet\n")
