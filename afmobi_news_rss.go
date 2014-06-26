@@ -217,7 +217,7 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 }
 
 // Goal
-func itemHandlerGold(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+func itemHandlerGoal(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	fmt.Printf("Goal start\n")
 	defer fmt.Printf("Goal end\n")
 	f := func(item *rss.Item) {
