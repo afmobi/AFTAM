@@ -1,1 +1,1 @@
-For afmoibi Twitter push rss.
+## For afmobi Twitter news strem rss.
