@@ -348,7 +348,7 @@ func PostTweet(tweet string) {
 	api := anaconda.NewTwitterApi(ReadAccessToken(), ReadAccessTokenSecret())
 
 	v := url.Values{}
-	_, err := api.PostTweet(tweet + "#afmobi", v)
+	_, err := api.PostTweet(tweet + " #afmobi", v)
 	if err != nil {
 		log.Printf("Error posting tweet: %s", err)
 	}
