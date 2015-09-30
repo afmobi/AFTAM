@@ -31,14 +31,22 @@ func main() {
 
   //http://www.theguardian.com/uk/rss
 	go PollFeed("http://www.theguardian.com/uk/rss", itemHandlerTheguardian)
+	//
 	go PollFeed("http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP", itemHandlerGoal)
+	//
 	//go PollFeed("http://www.fifa.com/worldcup/news/rss.xml", itemHandlerWC2014)
-	//feed://en.vietnamplus.vn/rss/news.rss
-	go PollFeed("http://en.vietnamplus.vn/Home/TOPSTORIES.rss", itemHandlerVietnamplus)
+	//
+	go PollFeed("http://en.vietnamplus.vn/rss/news.rss", itemHandlerVietnamplus)
+	//
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
+	//
 	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
+	//
 	go PollFeed("http://www.thejakartapost.com/breaking/feed", itemHandlerThejakartapost)
-	PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
+	//
+	go PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
+	//http://www.thisdaylive.com/go/search/?search=News&contenttype=article&sort=date&output=rss
+	PollFeed("http://www.thisdaylive.com/go/search/?search=News&contenttype=article&sort=date&output=rss", itemHandlerThisdaylive)
 
 	fmt.Printf("Start to get the RSS\n")
 }
@@ -121,7 +129,7 @@ func itemHandlerReddit(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	}
 }
 
-func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+func itemHandler(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	fmt.Printf("Allafrica start\n")
 	defer fmt.Printf("Allafrica end\n")
 	f := func(item *rss.Item) {
@@ -132,7 +140,25 @@ func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		tag_country := strings.Replace(strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1), "'", "", -1)
 		// tag_country := strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1)
 		/*		PostTweet(short_title + " " + item.Links[0].Href + " #allafrica")*/
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #" + tag_country + " #allafrica")
+		PostTweet(short_title + " " + item.Links[0].Href + " #" + tag_country)
+	}
+
+	if _, ok := first["allafrica"]; !ok {
+		first["allafrica"] = false
+	} else {
+		genericItemHandler(feed, ch, newItems, f)
+	}
+}
+
+func itemHandlerThisdaylive(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+	fmt.Printf("Thisdaylive start\n")
+	defer fmt.Printf("Thisdaylive end\n")
+	f := func(item *rss.Item) {
+		short_title := item.Title
+		if len(short_title) > 100 {
+			short_title = short_title[:99] + "…"
+		}
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["allafrica"]; !ok {
@@ -150,7 +176,7 @@ func itemHandlerBiztechafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.I
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #biztechafrica")
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["biztechafrica"]; !ok {
@@ -168,7 +194,7 @@ func itemHandlerBBCAfrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #bbcafrica")
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["bbcafrica"]; !ok {
@@ -186,7 +212,7 @@ func itemHandlerOafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Africa" + " #Oafrica")
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["oafrica"]; !ok {
@@ -205,7 +231,7 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 			short_title = short_title[:49] + "…"
 		}
 		prefix := "thejakartapost.com/"
-		PostTweet(short_title + " " + prefix + item.Links[0].Href + " #afmobi" + " #Indonesia" + " #thejakartapost")
+		PostTweet(short_title + " " + prefix + item.Links[0].Href)
 	}
 
 	if _, ok := first["thejakartapost"]; !ok {
@@ -224,7 +250,7 @@ func itemHandlerGoal(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Goal.com")
+		PostTweet(short_title + " " + item.Links[0].Href + " #football")
 	}
 
 	if _, ok := first["Goal"]; !ok {
@@ -243,7 +269,7 @@ func itemHandlerWC2014(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #WorldCup")
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["WorldCup"]; !ok {
@@ -265,7 +291,7 @@ func itemHandlerVietnamplus(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Vietnamplus")
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["Vietnamplus"]; !ok {
@@ -284,7 +310,7 @@ func itemHandlerNationmultimedia(feed *rss.Feed, ch *rss.Channel, newItems []*rs
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Nationmultimedia")
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["Nationmultimedia"]; !ok {
@@ -303,7 +329,7 @@ func itemHandlerTheguardian(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		PostTweet(short_title + " " + item.Links[0].Href + " #afmobi" + " #Theguardian")
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["Theguardian"]; !ok {
@@ -322,7 +348,7 @@ func PostTweet(tweet string) {
 	api := anaconda.NewTwitterApi(ReadAccessToken(), ReadAccessTokenSecret())
 
 	v := url.Values{}
-	_, err := api.PostTweet(tweet, v)
+	_, err := api.PostTweet(tweet + "#afmobi", v)
 	if err != nil {
 		log.Printf("Error posting tweet: %s", err)
 	}
