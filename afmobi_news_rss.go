@@ -129,7 +129,7 @@ func itemHandlerReddit(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	}
 }
 
-func itemHandler(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
+func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 	fmt.Printf("Allafrica start\n")
 	defer fmt.Printf("Allafrica end\n")
 	f := func(item *rss.Item) {
@@ -161,8 +161,8 @@ func itemHandlerThisdaylive(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
-	if _, ok := first["allafrica"]; !ok {
-		first["allafrica"] = false
+	if _, ok := first["thisdaylive"]; !ok {
+		first["thisdaylive"] = false
 	} else {
 		genericItemHandler(feed, ch, newItems, f)
 	}
