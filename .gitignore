@@ -2,3 +2,4 @@ settings.json
 afmobi_news_rss
 error.txt
 *.out
+.DS_Store

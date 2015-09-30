@@ -31,16 +31,14 @@ func main() {
 
   //http://www.theguardian.com/uk/rss
 	go PollFeed("http://www.theguardian.com/uk/rss", itemHandlerTheguardian)
-  // go PollFeed("http://www.nationmultimedia.com/home/rss/breakingnews.rss", itemHandlerNationmultimedia) // nationmultimedia Breaking News
 	go PollFeed("http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP", itemHandlerGoal)
-	go PollFeed("http://www.fifa.com/worldcup/news/rss.xml", itemHandlerWC2014)
+	//go PollFeed("http://www.fifa.com/worldcup/news/rss.xml", itemHandlerWC2014)
 	//feed://en.vietnamplus.vn/rss/news.rss
 	go PollFeed("http://en.vietnamplus.vn/Home/TOPSTORIES.rss", itemHandlerVietnamplus)
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
 	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
 	go PollFeed("http://www.thejakartapost.com/breaking/feed", itemHandlerThejakartapost)
-	go PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
-	PollFeed("http://feeds.feedburner.com/onlineafrica", itemHandlerOafrica)
+	PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
 
 	fmt.Printf("Start to get the RSS\n")
 }
