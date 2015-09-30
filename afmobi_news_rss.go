@@ -140,7 +140,7 @@ func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		tag_country := strings.Replace(strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1), "'", "", -1)
 		// tag_country := strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1)
 		/*		PostTweet(short_title + " " + item.Links[0].Href + " #allafrica")*/
-		PostTweet(short_title + " " + item.Links[0].Href + " #" + tag_country)
+		PostTweet(short_title + " " + item.Links[0].Href)
 	}
 
 	if _, ok := first["allafrica"]; !ok {
