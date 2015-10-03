@@ -40,9 +40,10 @@ func main() {
 	//
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
 	//
+
 	go PollFeed("http://feeds.bbci.co.uk/news/world/africa/rss.xml", itemHandlerBBCAfrica)
 	//
-	go PollFeed("http://www.thejakartapost.com/breaking/feed", itemHandlerThejakartapost)
+
 	//
 	go PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
 	//http://www.thisdaylive.com/go/search/?search=News&contenttype=article&sort=date&output=rss
@@ -137,7 +138,7 @@ func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		if len(short_title) > 100 {
 			short_title = short_title[:99] + "…"
 		}
-		tag_country := strings.Replace(strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1), "'", "", -1)
+		//tag_country := strings.Replace(strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1), "'", "", -1)
 		// tag_country := strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1)
 		/*		PostTweet(short_title + " " + item.Links[0].Href + " #allafrica")*/
 		PostTweet(short_title + " " + item.Links[0].Href)
