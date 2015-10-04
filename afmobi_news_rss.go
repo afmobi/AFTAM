@@ -45,9 +45,9 @@ func main() {
 	//
 
 	//
-	go PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
+	PollFeed("http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf", itemHandlerAllafrica)
 	//http://www.thisdaylive.com/go/search/?search=News&contenttype=article&sort=date&output=rss
-	PollFeed("http://www.thisdaylive.com/go/search/?search=News&contenttype=article&sort=date&output=rss", itemHandlerThisdaylive)
+	//PollFeed("http://www.thisdaylive.com/go/search/?search=News&contenttype=article&sort=date&output=rss", itemHandlerThisdaylive)
 
 	fmt.Printf("Start to get the RSS\n")
 }
