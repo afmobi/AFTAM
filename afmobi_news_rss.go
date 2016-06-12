@@ -6,14 +6,10 @@ import (
 	"net/url"
 	"os"
 	"regexp"
-<<<<<<< HEAD
-//	"strings"
-=======
 
 	"github.com/ChimeraCoder/anaconda"
 	rss "github.com/haarts/go-pkg-rss"
 	//	"strings"
->>>>>>> pr/2
 	"time"
 )
 
@@ -31,23 +27,11 @@ func main() {
 	//go PollFeed("https://news.ycombinator.com/rss", itemHandlerHackerNews)
 	//PollFeed("http://www.reddit.com/r/golang.rss", itemHandlerReddit)
 
-<<<<<<< HEAD
-
-
-
-  //http://www.theguardian.com/uk/rss
-=======
 	//http://www.theguardian.com/uk/rss
->>>>>>> pr/2
 	go PollFeed("http://www.theguardian.com/uk/rss", itemHandlerTheguardian)
 	//
 	go PollFeed("http://www.goal.com/en/feeds/news?fmt=rss&ICID=HP", itemHandlerGoal)
 	//
-<<<<<<< HEAD
-	//go PollFeed("http://www.fifa.com/worldcup/news/rss.xml", itemHandlerWC2014)
-	//
-=======
->>>>>>> pr/2
 	go PollFeed("http://en.vietnamplus.vn/rss/news.rss", itemHandlerVietnamplus)
 	//
 	go PollFeed("http://www.biztechafrica.com/feed/rss", itemHandlerBiztechafrica)
@@ -153,13 +137,8 @@ func itemHandlerAllafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		}
 		//tag_country := strings.Replace(strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1), "'", "", -1)
 		// tag_country := strings.Replace(strings.Split(item.Title, ":")[0], " ", "", -1)
-<<<<<<< HEAD
-		/*		PostTweet(short_title + " " + item.Links[0].Href + " #allafrica")*/
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		/*		PostTweet(shortTitle + " " + item.Links[0].Href + " #allafrica")*/
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["allafrica"]; !ok {
@@ -173,19 +152,11 @@ func itemHandlerThisdaylive(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 	fmt.Printf("Thisdaylive start\n")
 	defer fmt.Printf("Thisdaylive end\n")
 	f := func(item *rss.Item) {
-<<<<<<< HEAD
-		short_title := item.Title
-		if len(short_title) > 100 {
-			short_title = short_title[:99] + "…"
-		}
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		shortTitle := item.Title
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["thisdaylive"]; !ok {
@@ -203,11 +174,7 @@ func itemHandlerBiztechafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.I
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["biztechafrica"]; !ok {
@@ -225,11 +192,7 @@ func itemHandlerBBCAfrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item)
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["bbcafrica"]; !ok {
@@ -247,11 +210,7 @@ func itemHandlerOafrica(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["oafrica"]; !ok {
@@ -270,11 +229,7 @@ func itemHandlerThejakartapost(feed *rss.Feed, ch *rss.Channel, newItems []*rss.
 			shortTitle = shortTitle[:49] + "…"
 		}
 		prefix := "thejakartapost.com/"
-<<<<<<< HEAD
-		PostTweet(short_title + " " + prefix + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + prefix + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["thejakartapost"]; !ok {
@@ -293,11 +248,7 @@ func itemHandlerGoal(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href + " #football")
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href + " #football")
->>>>>>> pr/2
 	}
 
 	if _, ok := first["Goal"]; !ok {
@@ -316,11 +267,7 @@ func itemHandlerWC2014(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Item) {
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["WorldCup"]; !ok {
@@ -339,11 +286,7 @@ func itemHandlerVietnamplus(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["Vietnamplus"]; !ok {
@@ -362,11 +305,7 @@ func itemHandlerNationmultimedia(feed *rss.Feed, ch *rss.Channel, newItems []*rs
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["Nationmultimedia"]; !ok {
@@ -385,11 +324,7 @@ func itemHandlerTheguardian(feed *rss.Feed, ch *rss.Channel, newItems []*rss.Ite
 		if len(shortTitle) > 100 {
 			shortTitle = shortTitle[:99] + "…"
 		}
-<<<<<<< HEAD
-		PostTweet(short_title + " " + item.Links[0].Href)
-=======
 		PostTweet(shortTitle + " " + item.Links[0].Href)
->>>>>>> pr/2
 	}
 
 	if _, ok := first["Theguardian"]; !ok {
@@ -408,11 +343,7 @@ func PostTweet(tweet string) {
 	api := anaconda.NewTwitterApi(ReadAccessToken(), ReadAccessTokenSecret())
 
 	v := url.Values{}
-<<<<<<< HEAD
-	_, err := api.PostTweet(tweet + " #afmobi", v)
-=======
 	_, err := api.PostTweet(tweet+" #afmobi", v)
->>>>>>> pr/2
 	if err != nil {
 		log.Printf("Error posting tweet: %s", err)
 	}
